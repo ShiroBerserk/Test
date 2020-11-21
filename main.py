@@ -6,9 +6,15 @@ import datetime
 from googletrans import Translator
 import json
 import requests
-import config
+import os
 
-client = commands.Bot(command_prefix = config.prefix)
+
+token = str(os.getenv("token"))
+prefix = "/"
+
+
+client = commands.Bot(command_prefix = prefix)
+
 
 @client.event
 async def on_ready():
@@ -46,4 +52,4 @@ async def on_reaction_add(rec,user):
         e = discord.Embed(title = "Scottish", description = lang5.text)
         await channel.send(embed = e)
 
-client.run(config.token)
+client.run(token)
