@@ -3,6 +3,7 @@ from discord.ext import commands
 
 from translate import translator
 import datetime
+import os
 
 token = str(os.getenv("token"))
 prefix = "/"
