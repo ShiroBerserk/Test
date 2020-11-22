@@ -1,55 +1,46 @@
 import discord
 from discord.ext import commands
-import asyncio
 
+from translate import translator
 import datetime
-from googletrans import Translator
-import json
-import requests
-import os
-
 
 token = str(os.getenv("token"))
 prefix = "/"
 
-
 client = commands.Bot(command_prefix = prefix)
-
 
 @client.event
 async def on_ready():
     print((datetime.datetime.now().strftime("%H:%M:%S")) + "| | " + (client.user.name) + '#' + (client.user.discriminator))
 
-
 @client.event
-async def on_reaction_add(rec,user):
-    translator = Translator()
-    await asyncio.sleep(5.5)
+async def on_reaction_add(rec, user):
     channel = rec.message.channel
     contxt = rec.message.content
+
     if str(rec) == "🇷🇺":
-        lang1 = translator.translate(text = str(contxt), dest='ru')
-        e = discord.Embed(title = "Russian", description = lang1.text)
+        lang = translator(source = 'en', target = 'ru', phrase =contxt)
+        e = discord.Embed(title = "Russian", description = lang[0][0][0])
         await channel.send(embed = e)
 
     elif str(rec) == "🇪🇸":
-        lang2 = translator.translate(text = str(contxt), dest='es')
-        e = discord.Embed(title = "Spanish", description = lang2.text)
+        lang = translator(source = 'en', target = 'es', phrase =contxt)
+        e = discord.Embed(title = "Spanish", description = lang[0][0][0])
         await channel.send(embed = e)
 
     elif str(rec) == "🇺🇸":
-        lang3 = translator.translate(text = str(contxt), dest='en')
-        e = discord.Embed(title = "English", description = lang3.text)
+        lang = translator(source = 'en', target = 'en', phrase =contxt)
+        e = discord.Embed(title = "English", description = lang[0][0][0])
         await channel.send(embed = e)
 
     elif str(rec) == "🇵🇭":
-        lang4 = translator.translate(text = str(contxt), dest='tl')
-        e = discord.Embed(title = "Filipino", description = lang4.text)
+        lang = translator(source = 'en', target = 'tl', phrase =contxt)
+        e = discord.Embed(title = "Filipino", description = lang[0][0][0])
         await channel.send(embed = e)
 
     elif str(rec) == "🏴󠁧󠁢󠁳󠁣󠁴󠁿":
-        lang5 = translator.translate(text = str(contxt), dest='gd')
-        e = discord.Embed(title = "Scottish", description = lang5.text)
+        lang = translator(source = 'en', target = 'gd', phrase =contxt)
+        e = discord.Embed(title = "Scottish", description = lang[0][0][0])
         await channel.send(embed = e)
 
 client.run(token)
