@@ -1,5 +1,5 @@
 discord.py 
 asyncio
-py-translate
+google_trans_new
 pymongo
 requests
