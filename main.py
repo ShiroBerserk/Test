@@ -58,7 +58,7 @@ async def on_reaction_add(rec,user):
         await channel.send(embed = e)
 
     elif str(rec) == "🇰🇿":
-        lang7 = translator.translate(text = str(contxt), lang_tgt='kz')
+        lang7 = translator.translate(text = str(contxt), lang_tgt='kk')
         e = discord.Embed(title = "Kazakhstan", description = lang7)
         await channel.send(embed = e)
 
